@@ -51,7 +51,7 @@ st.write(
 )
 # Declare a form to receive a movie's review
 form = st.form(key="my_form")
-input_cnpj = form.text_input(label="Insira o CNPJ a ser consultado")
+input_cnpj = form.text_input(label="Insira o CNPJ")
 submit = form.form_submit_button(label="Consultar")
 
 if submit:
