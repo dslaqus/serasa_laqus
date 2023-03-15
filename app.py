@@ -1,17 +1,25 @@
-# import packages
-import streamlit as st
-import os
+import pandas as pd
 import numpy as np
-import pandas as pd
-# text preprocessing modules
-from string import punctuation
-
-# text preprocessing modules
-import re  # regular expression
-import warnings
+import altair as alt
+import plotly.express as px
+import streamlit as st
+from urllib.error import URLError
 import os
-import pandas as pd
+import sys
 from s3fs.core import S3FileSystem
+import warnings
+import re
+import plotly.graph_objects as go
+import requests
+import pandas as pd
+import numpy as np
+from datetime import datetime
+import boto3
+import io
+import time
+import re
+import os
+from dependencies import consulta_cnpjs, retorna_consulta
 
 
 # aws keys stored in ini file in same path
@@ -19,45 +27,14 @@ from s3fs.core import S3FileSystem
 os.environ['AWS_CONFIG_FILE'] = 'aws_config.ini'
 
 s3 = S3FileSystem(anon=False)
-key = 'DadosNotion/DadosNotion_11_1_2023.csv'
+key = 'streamlit/informes_FIDCs_2023-02-14.csv'
 bucket = 'data-science-laqus'
 
-df = pd.read_csv(s3.open(f'{bucket}/{key}', mode='rb')).drop(columns='Unnamed: 0')
+uploaded_file = st.file_uploader("Choose a file")
+if uploaded_file is not None:
+    dataframe = pd.read_excel(uploaded_file)
+    cnpjs = dataframe['CNPJ'].values.tolist()
 
 
-
-
-warnings.filterwarnings("ignore")
-# seeding
-np.random.seed(123)
- 
-# load stop words
-
-
-
-
-# function to clean the text
-@st.cache
-def run_serasa(cnpj):
-    return cnpj
-
-
-# Set the app title
-st.title("Laqus | Consulta SERASA")
-st.write(
-    """
-    Consulta de dados da SERASA
-    """
-)
-# Declare a form to receive a movie's review
-form = st.form(key="my_form")
-input_cnpj = form.text_input(label="Insira o CNPJ")
-submit = form.form_submit_button(label="Consultar")
-
-if submit:
-    # Run Serasa
-    result = run_serasa(input_cnpj)
- 
-    # Display results of the NLP task
-    st.header("Resultado")
-    st.write(f"CNPJ Consultado: {result}")
+    df = retorna_consulta(cnpjs)
+    st.write(dataframe)
