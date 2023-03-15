@@ -1,11 +1,8 @@
 import requests
 import pandas as pd
-import numpy as np
 from datetime import datetime
 from s3fs.core import S3FileSystem
 import boto3
-import io
-import time
 import re
 import os
 

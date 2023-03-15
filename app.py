@@ -1,25 +1,10 @@
 import pandas as pd
-import numpy as np
-import altair as alt
-import plotly.express as px
 import streamlit as st
-from urllib.error import URLError
 import os
-import sys
 from s3fs.core import S3FileSystem
-import warnings
-import re
-import plotly.graph_objects as go
-import requests
 import pandas as pd
-import numpy as np
-from datetime import datetime
-import boto3
-import io
-import time
-import re
 import os
-from dependencies import consulta_cnpjs, retorna_consulta
+from dependencies import retorna_consulta
 
 
 # aws keys stored in ini file in same path
