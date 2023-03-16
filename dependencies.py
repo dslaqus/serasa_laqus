@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 from datetime import datetime
-from s3fs.core import S3FileSystem
+# from s3fs.core import S3FileSystem
 import boto3
 import re
 import os
@@ -11,7 +11,7 @@ import os
 def consulta_cnpjs(cnpj):
 
     os.environ['AWS_CONFIG_FILE'] = 'aws_config.ini'
-    s3 = S3FileSystem(anon=False)
+    # s3 = S3FileSystem(anon=False)
 
 
 
